@@ -1,6 +1,8 @@
-body { 
-    font-family: 'Inter', sans-serif; 
-    scroll-behavior: smooth; 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
 }
 
 /* Scrollbar Minimalista */
@@ -17,4 +19,23 @@ body {
 /* Ajustes de imagen */
 img {
     transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* --- EFECTO DE IMÁGENES REX REGUM (B&N, COLOR Y ZOOM) --- */
+
+/* Por defecto: Imagen en blanco y negro */
+#catalog-container img {
+    filter: grayscale(100%);
+    transform: scale(1);
+    transition: filter 0.5s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Al pasar el cursor: Recupera color real y hace zoom suave */
+#catalog-container div:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+/* Evitamos desbordes en el contenedor de la tarjeta al hacer zoom */
+#catalog-container > div {
+    overflow: hidden;
 }
