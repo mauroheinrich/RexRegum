@@ -9,19 +9,19 @@
 </head>
 <body class="bg-black text-white font-sans antialiased selection:bg-white selection:text-black">
 
-    <header class="border-b border-neutral-900 sticky top-0 bg-black/85 backdrop-blur-md z-40">
-        <div class="container mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-4">
-            <a href="index.html" class="flex items-center">
-                <img src="img/logo.png" alt="Rex Regum Logo" class="h-16 w-auto object-contain transition-transform hover:scale-105">
+    <header class="border-b border-neutral-900 sticky top-0 bg-black/85 backdrop-blur-md z-40 py-4 md:py-0">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <a href="index.html" class="flex items-center justify-center">
+                <img src="img/logo.png" alt="Rex Regum Logo" class="h-12 md:h-16 w-auto object-contain transition-transform hover:scale-105">
             </a>
-            <nav class="flex items-center space-x-6 text-xs uppercase font-bold tracking-widest text-neutral-400">
-                <a href="index.html" class="hover:text-white transition-colors">Tienda</a>
-                <a href="nosotros.html" class="hover:text-white transition-colors">Nosotros</a>
-                <a href="talles.html" class="hover:text-white transition-colors">Guía de Talles</a>
-                <a href="alianzas.html" class="text-white transition-colors">Comunidades</a>
+            <nav class="flex items-center space-x-0 md:space-x-6 text-xs uppercase font-bold tracking-widest text-neutral-400">
+                <a href="index.html" class="hover:text-white transition-colors py-1">Tienda</a>
+                <a href="nosotros.html" class="hover:text-white transition-colors py-1">Nosotros</a>
+                <a href="talles.html" class="hover:text-white transition-colors py-1">Guía de Talles</a>
+                <a href="alianzas.html" class="text-white transition-colors py-1">Comunidades</a>
             </nav>
-            <div class="flex items-center space-x-4">
-                <button onclick="window.location.href='index.html'" class="bg-white text-black px-4 py-2 text-xs font-black tracking-widest uppercase hover:bg-neutral-200 transition-all">
+            <div class="flex items-center justify-center w-full md:w-auto">
+                <button onclick="window.location.href='index.html'" class="bg-white text-black px-4 py-2 text-xs font-black tracking-widest uppercase hover:bg-neutral-200 transition-all text-center max-w-[150px] w-full">
                     VER CATÁLOGO
                 </button>
             </div>
@@ -80,7 +80,7 @@
                 </p>
             </div>
 
-            <div class="border border-neutral-900 overflow-hidden mb-8">
+            <div class="contenedor-tabla-responsive">
                 <table class="w-full text-left text-xs md:text-sm">
                     <thead>
                         <tr class="border-b border-neutral-900 bg-neutral-900 text-[9px] uppercase font-black tracking-widest text-neutral-400">
@@ -109,7 +109,7 @@
                 </table>
             </div>
             
-            <p class="text-[10px] text-neutral-500 uppercase tracking-wider text-center italic">
+            <p class="text-[10px] text-neutral-500 uppercase tracking-wider text-center italic mt-4">
                 * El dossier con la planilla de costos fijos, márgenes netos por prenda y muestras textiles se envía de forma privada al confirmar la identidad de la institución.
             </p>
         </section>
@@ -149,7 +149,7 @@
 
     </main>
 
-   <footer class="bg-black border-t border-neutral-900 text-neutral-500 text-xs py-12 mt-20">
+    <footer class="bg-black border-t border-neutral-900 text-neutral-500 text-xs py-12 mt-20">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
                 <h4 class="font-bold tracking-widest uppercase text-xs mb-4 text-white">Nos inspira</h4>
@@ -158,8 +158,7 @@
                 </p>
                 <span class="block text-[10px] text-neutral-600 uppercase font-bold tracking-wider mt-2">— San Francisco de Asís</span>
             </div>
-            
-            <div class="md:text-right flex flex-col justify-between items-start md:items-end gap-4">
+            <div class="footer-derecho flex flex-col justify-between items-center gap-4">
                 <div class="space-y-1">
                     <span class="font-black text-white tracking-widest text-sm block">REX REGUM</span>
                     <a href="https://www.instagram.com/rexregum.indumentaria" target="_blank" class="text-[11px] text-neutral-400 hover:text-white transition-colors uppercase font-bold tracking-wider block">

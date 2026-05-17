@@ -1,41 +1,175 @@
+/* ==========================================================================
+   REX REGUM — HOJA DE ESTILOS DE MARCA DEFINITIVA (URBANA / PREMIUM)
+   ========================================================================== */
+
+/* 1. CONFIGURACIONES GENERALES Y TIPOGRAFÍA */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
-body {
+html, body {
     font-family: 'Inter', sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
-/* Scrollbar Minimalista */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #0a0a0a; }
-::-webkit-scrollbar-thumb { background: #262626; border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: #404040; }
-
-/* Efecto suave para el drawer */
-#cart-drawer {
-    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+/* Custom Scrollbar minimalista estilo Streetwear */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+::-webkit-scrollbar-thumb {
+    background: #262626; /* neutral-800 */
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #404040; /* neutral-600 */
 }
 
-/* Ajustes de imagen */
-img {
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-/* --- EFECTO DE IMÁGENES REX REGUM (B&N, COLOR Y ZOOM) --- */
-
-/* Por defecto: Imagen en blanco y negro */
-#catalog-container img {
-    filter: grayscale(100%);
-    transform: scale(1);
-    transition: filter 0.5s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+/* 2. HEADER Y MENÚ ADAPTATIVO (PREMIUM MOBILE FLEX) */
+header .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
 }
 
-/* Al pasar el cursor: Recupera color real y hace zoom suave */
-#catalog-container div:hover img {
-    filter: grayscale(0%);
-    transform: scale(1.05);
+header nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
 }
 
-/* Evitamos desbordes en el contenedor de la tarjeta al hacer zoom */
+header nav a {
+    padding: 0.25rem 0;
+    width: 100%;
+    display: block;
+}
+
+@media (min-width: 768px) {
+    header .container {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+        gap: 0;
+    }
+    header nav {
+        flex-direction: row;
+        width: auto;
+        gap: 1.5rem;
+    }
+    header nav a {
+        width: auto;
+        display: inline;
+    }
+}
+
+/* 3. COMPORTAMIENTO GLOBAL DEL FOOTER (RESPONSIVE) */
+footer {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    footer {
+        text-align: left;
+    }
+    .footer-derecho {
+        text-align: right;
+        align-items: flex-end !important;
+    }
+}
+
+/* 4. ALINEACIONES TEXTUALES Y BLOQUES DE IDENTIDAD */
+.bloque-identidad h1, 
+.bloque-identidad h2, 
+.bloque-identidad h3 {
+    text-align: center !important;
+}
+
+.bloque-identidad p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+/* Ajuste responsivo para el catálogo */
+.info-producto {
+    text-align: center;
+}
+
+/* Ajuste responsivo para los tres pasos en alianzas.html */
+main .grid-cols-1 > div {
+    text-align: center;
+}
+
+@media (min-width: 640px) {
+    .info-producto {
+        text-align: left;
+    }
+}
+
+@media (min-width: 768px) {
+    main .grid-cols-1 > div {
+        text-align: left;
+    }
+}
+
+/* 5. CONTENEDORES DE TABLAS (EVITA CORTES EN PANTALLAS CHICAS) */
+.contenedor-tabla-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #171717; /* border-neutral-900 */
+    background-color: #0a0a0a; /* neutral-950 */
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.contenedor-tabla-responsive table {
+    min-width: 500px; /* Mantiene la estructura legible */
+    border-collapse: collapse;
+}
+
+/* 6. TARJETAS DE PRODUCTOS Y COMPORTAMIENTO DE IMÁGENES */
 #catalog-container > div {
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+#catalog-container > div:hover {
+    border-color: #404040;
+}
+
+#catalog-container img {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#catalog-container > div:hover img {
+    transform: scale(1.03);
+}
+
+/* 7. ENTORNO DEL CARRITO (DRAWER LATERAL FLUÍDO) */
+#cart-drawer {
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* 8. BOTÓN FLOTANTE WHATSAPP */
+.fixed.bottom-6.right-6 {
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
 }

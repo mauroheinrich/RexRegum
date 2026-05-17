@@ -29,10 +29,10 @@ async function fetchProductos() {
     }
 }
 
-// 2. RENDERIZAR CATÁLOGO SIN LÍMITE DE TEXTO EN LAS DESCRIPCIONES
+// 2. RENDERIZAR CATÁLOGO CON ALINEACIÓN RESPONSIVA
 function renderCatalogo() {
     const container = document.getElementById("catalog-container");
-    if (!container) return; // Frena de forma segura si estamos en otra subpágina
+    if (!container) return;
     container.innerHTML = "";
 
     if (productos.length === 0) {
@@ -43,7 +43,6 @@ function renderCatalogo() {
     productos.forEach(p => {
         if (!p.id || parseInt(p.stock) <= 0) return;
         
-        // Separación limpia de cadenas del Sheets
         const talles = p.talles ? p.talles.toString().split(",").map(t => t.trim()) : [];
         const colores = p.colores ? p.colores.toString().split(",").map(c => c.trim()) : [];
         const imagenes = p.imagenurl ? p.imagenurl.toString().split(",").map(img => img.trim()) : [];
@@ -57,7 +56,7 @@ function renderCatalogo() {
             <div class="relative overflow-hidden mb-4">
                 <img id="prod-img-${p.id}" src="${imagenInicial}" alt="${p.producto}" class="w-full h-84 object-cover">
             </div>
-            <div>
+            <div class="info-producto">
                 <span class="text-[10px] text-neutral-500 uppercase tracking-widest font-bold">${p.categoria || 'Remeras'}</span>
                 <h3 class="font-bold text-base uppercase tracking-tight mt-1">${p.producto}</h3>
                 <p class="text-xs text-neutral-400 my-2 font-light leading-relaxed mb-4">${p.descripcion || ''}</p>
@@ -119,7 +118,7 @@ function cambiarImagenColor(productId, selectElement) {
     }
 }
 
-// 4. MANEJO DE CONTROLES DE CANTIDAD INDIVIDUAL (+ / -)
+// 4. MANEJO DE CONTROLES DE QUANTITY
 function alterarCantidad(id, cambio) {
     const input = document.getElementById(`cant-${id}`);
     if (!input) return;
@@ -133,7 +132,7 @@ function alterarCantidad(id, cambio) {
     input.value = valorActual;
 }
 
-// 5. CONTROL DINÁMICO DE STOCK SEGÚN CURVA INTERNA DE VARIANTES
+// 5. CONTROL DINÁMICO DE STOCK
 function actualizarStockDinamico(id) {
     const prod = productos.find(p => p.id == id);
     if (!prod) return;
@@ -153,14 +152,14 @@ function actualizarStockDinamico(id) {
     }
 }
 
-// 6. AÑADIR ELEMENTOS AL CARRITO CON CANTIDADES MULTIPLES
+// 6. AÑADIR ELEMENTOS AL CARRITO
 function agregarAlCarritoConCantidad(id) {
     const prod = productos.find(p => p.id == id);
     if (!prod) return;
 
-    const talle = document.getElementById(`talle-${id}`).value;
-    const color = document.getElementById(`color-${id}`).value;
-    const cantidad = parseInt(document.getElementById(`cant-${id}`).value) || 1;
+    const talle = document.getElementById("talle-" + id).value;
+    const color = document.getElementById("color-" + id).value;
+    const cantidad = parseInt(document.getElementById("cant-" + id).value) || 1;
     const imgComponent = document.getElementById(`prod-img-${id}`);
     const imagen = imgComponent ? imgComponent.src : '';
 
@@ -188,7 +187,7 @@ function agregarAlCarritoConCantidad(id) {
     abrirDrawerCarrito();
 }
 
-// 7. INTERFAZ: CONTADOR GLOBAL DEL HEADER
+// 7. CONTADOR GLOBAL
 function actualizarBadgeContador() {
     const badge = document.getElementById("cart-badge");
     if (badge) {
@@ -196,7 +195,7 @@ function actualizarBadgeContador() {
     }
 }
 
-// 8. INTERFAZ: CREAR EL PANEL LATERAL DEL CARRITO (DRAWER)
+// 8. CREAR PANEL LATERAL
 function initDrawerCarritoVisual() {
     let drawer = document.getElementById("cart-drawer");
     if (drawer) return;
@@ -210,8 +209,7 @@ function initDrawerCarritoVisual() {
             <h3 class="font-black text-sm uppercase tracking-widest">TUS COMPRAS</h3>
             <button onclick="cerrarDrawerCarrito()" class="text-neutral-500 hover:text-white font-bold text-xs uppercase tracking-wider">Cerrar ✕</button>
         </div>
-        <div id="drawer-items-container" class="p-6 overflow-y-auto flex-1 space-y-4 divide-y divide-neutral-900">
-            </div>
+        <div id="drawer-items-container" class="p-6 overflow-y-auto flex-1 space-y-4 divide-y divide-neutral-900"></div>
         <div class="p-6 border-t border-neutral-900 bg-neutral-950 space-y-4">
             <div class="flex justify-between items-center text-sm">
                 <span class="font-bold text-neutral-400 uppercase tracking-wider text-xs">Total Estimado:</span>
@@ -229,7 +227,7 @@ function initDrawerCarritoVisual() {
 function abrirDrawerCarrito() { document.getElementById("cart-drawer").classList.remove("translate-x-full"); }
 function cerrarDrawerCarrito() { document.getElementById("cart-drawer").classList.add("translate-x-full"); }
 
-// 9. SINCRONIZAR ELEMENTOS DENTRO DEL PANEL LATERAL
+// 9. SINCRONIZAR PANEL LATERAL
 function syncDrawerContenido() {
     const container = document.getElementById("drawer-items-container");
     const totalDisplay = document.getElementById("drawer-total");
@@ -269,13 +267,13 @@ function syncDrawerContenido() {
 }
 
 function removerDelDrawer(itemId) {
-    carrito = Size = carrito.filter(item => item.itemId !== itemId);
+    carrito = carrito.filter(item => item.itemId !== itemId);
     localStorage.setItem('carrito_rexregum', JSON.stringify(carrito));
     actualizarBadgeContador();
     syncDrawerContenido();
 }
 
-// 10. BOTONES DE ACCIÓN GLOBAL (CHECKOUT)
+// 10. CHECKOUT LÓGICA
 function procesarCompra() {
     if (carrito.length === 0) {
         alert("Tu carrito está vacío. Sumá algún diseño antes de finalizar.");
@@ -290,7 +288,7 @@ function procesarCompra() {
     }
 }
 
-// 11. INTERFAZ: FORMULARIO MODAL DE REGISTRO UNIFICADO
+// 11. FORMULARIO MODAL
 function initModalCheckout() {
     let modal = document.getElementById("checkout-modal");
     if (modal) return;
@@ -332,7 +330,7 @@ function initModalCheckout() {
 function abrirModalCheckout() { document.getElementById("checkout-modal").classList.replace("hidden", "flex"); }
 function cerrarModalCheckout() { document.getElementById("checkout-modal").classList.replace("flex", "hidden"); }
 
-// 12. PROCESAMIENTO POST COMPRA: ENVÍO AL SHEETS Y REDIRECCIÓN A WHATSAPP
+// 12. ENVÍO GAS Y WHATSAPP
 async function ejecutarCompraFinal(event) {
     event.preventDefault();
     const btn = event.target.querySelector("button[type='submit']");
